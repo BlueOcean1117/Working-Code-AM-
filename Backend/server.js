@@ -24,7 +24,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://blue-ocean-erp-system-1.vercel.app"
+      "https://blue-ocean-erp-system-1.vercel.app",
+      "https://working-code-am.vercel.app"
     ],
     credentials: true
   })
