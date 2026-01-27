@@ -32,8 +32,8 @@ app.use(
 // 	})
 // );
 
-app.use("/api/v1/shipment", shipmentRoutes);
-app.use("/api/v1/notification", notificationRoutes);
+app.use("/api/shipments", shipmentRoutes);
+app.use("/api/notification", notificationRoutes);
 
 // Testing the server
 app.get("/", (req, res) => {
