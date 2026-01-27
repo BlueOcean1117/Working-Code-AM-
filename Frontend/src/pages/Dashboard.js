@@ -29,7 +29,7 @@ export default function Dashboard() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    API.get("/shipment/dashboard")
+    API.get("/shipments/dashboard/summary")
       .then((res) => {
         setSummary(res.data);
         setLoading(false);

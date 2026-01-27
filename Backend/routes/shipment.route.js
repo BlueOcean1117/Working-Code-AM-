@@ -11,7 +11,7 @@ const {
 } = require("../controllers/shipment.controller");
 const router = express.Router();
 
-router.get("/dashboard", fetchDashboardSummary);
+router.get("/dashboard/summary", fetchDashboardSummary);
 router.post("/", addShipment);
 router.patch("/:id", updateShipment);
 router.patch("/delivery-status/:id", updateDeliveryStatus);
