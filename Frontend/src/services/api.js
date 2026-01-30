@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL:
-    process.env.REACT_APP_API_URL,
+    "https://working-code-am.onrender.com/api",
   withCredentials: false
 });
 

@@ -22,11 +22,11 @@ const PORT = process.env.PORT || 4000;
 ====================== */
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
+    origin: true,
+   /*  [  "http://localhost:3000",
       "https://blue-ocean-erp-system-1.vercel.app",
-      "https://working-code-am.vercel.app"
-    ],
+      "https://working-code-am.vercel.app"],*/
+
     credentials: true
   })
 );
@@ -36,7 +36,7 @@ app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
-/* ======================
+/* ===================
    MONGODB CONNECTION
 ====================== */
 mongoose

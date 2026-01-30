@@ -35,33 +35,31 @@ export default function ShipmentsList() {
 
   // ---------- INITIAL LOAD ----------
   useEffect(() => {
-    API.get("/test")
-      .then((res) => {
-        setBackendStatus(
-          res.data.database === "Connected" ? "connected" : "offline"
-        );
-      })
-      .catch(() => setBackendStatus("disconnected"))
-      .finally(() => fetchAll());
-  }, []);
+  API.get("/health")
+    .then(() => setBackendStatus("connected"))
+    .catch(() => setBackendStatus("disconnected"))
+    .finally(fetchAll);
+}, []);
+
 
   // ---------- FETCH SHIPMENTS ----------
   const fetchAll = () => {
     setLoading(true);
     setError("");
 
-    API.get("/shipment", { params: { page, pageSize, search } })
+    API.get("/shipments")
       .then((res) => {
-        const data = res.data?.shipments || res.data || [];
+        const data = res.data || [];
         setRows(data);
         setFilteredRows(data);
-        setTotal(res.data?.total || data.length);
+        setTotal(data.length);
       })
       .catch((err) => {
         console.error("Failed to load shipments:", err);
         setError("Failed to load shipments. Check backend.");
         setRows([]);
         setFilteredRows([]);
+        setBackendStatus("disconnected");
       })
       .finally(() => setLoading(false));
   };
@@ -72,9 +70,11 @@ export default function ShipmentsList() {
   }, [page, pageSize, search]);
 
   // ---------- STATUS UPDATE ----------
-  async function updateStatus(id, status) {
+   async function updateStatus(id, status) {
     try {
-      await API.patch(`/shipment/delivery-status/${id}`, { status });
+      await API.patch(`/shipments/${id}/delivery-status`, {
+        delivery_status: status,
+      });
       fetchAll();
     } catch {
       toast.error("Status update failed");
